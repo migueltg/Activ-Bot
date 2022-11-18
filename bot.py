@@ -112,6 +112,7 @@ class Bot_Stoch_RSI_EMA():
 
         return(df)
 
+############################################################## # UNCOMMENT TO TRADE #############################################################
 
 bot1 = Bot_Stoch_RSI_EMA('ADAUSDT','15m', 200)
 # bot2 = Bot_Stoch_RSI_EMA('ALGOUSDT','15m', 200)
@@ -210,8 +211,8 @@ bot93 = Bot_Stoch_RSI_EMA('XRPUSDT','15m', 200)
 # bot95 = Bot_Stoch_RSI_EMA('ZILUSDT','15m', 200)
 # bot96 = Bot_Stoch_RSI_EMA('ZRXUSDT','15m', 200)
 
-# matic = Bot_Stoch_RSI_EMA('MATICUSDT', '1m', 100).dfall('MATICUSDT', '1m', 100)
-# sol = Bot_Stoch_RSI_EMA('SOLUSDT', '1m', 100).dfall('SOLUSDT', '1m', 100)
+
+############################################################## # UNCOMMENT TO TRADE #############################################################
 timing = 0.01
 
 while True:

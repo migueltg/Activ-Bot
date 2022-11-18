@@ -1,0 +1,44 @@
+{
+  "symbols": [
+    {
+      "symbol": "ADAUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "CHZUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "LINKUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "MASKUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "MATICUSDT",
+      "interval": "15m",
+      "limit": 200
+    },
+    {
+      "symbol": "XRPUSDT",
+      "interval": "15m",
+      "limit": 200
+    }
+  ]
+}

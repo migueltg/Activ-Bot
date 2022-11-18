@@ -63,8 +63,8 @@ class Bot_Stoch_RSI_EMA():
 
         #Long Signal
         df['Buy'] = (
-        df.stochrsi_k <= config.BUY_STOCK_K) & (
-        df.stochrsi_d <= config.BUY_STOCK_D) & (
+        df.stochrsi_k <= 0.15) & (
+        df.stochrsi_d <= 0.15) & (
         df.stochrsi_k > df.stochrsi_d) & (
         # df.Close > df[f'EMA_'+str(emafast)]) #& (
         # df.Close > df[f'EMA_'+str(emamiddle)]) & (
@@ -76,8 +76,8 @@ class Bot_Stoch_RSI_EMA():
 
         # #Sell Signal
         df['Sell'] = (
-        df.stochrsi_k >= config.SELL_STOCK_D) & (
-        df.stochrsi_d >= config.SELL_STOCK_D) & (
+        df.stochrsi_k >= 0.85) & (
+        df.stochrsi_d >= 0.85) & (
         df.stochrsi_k < df.stochrsi_d) & (
         # df.Close < df[f'EMA_'+str(emafast)]) #& (
         # df.Close < df[f'EMA_'+str(emamiddle)]) & (
@@ -112,7 +112,8 @@ class Bot_Stoch_RSI_EMA():
 
         return(df)
 
-############################################################## # UNCOMMENT TO TRADE #############################################################
+
+# UNCOMMENT TO TRADE
 
 bot1 = Bot_Stoch_RSI_EMA('ADAUSDT','15m', 200)
 # bot2 = Bot_Stoch_RSI_EMA('ALGOUSDT','15m', 200)
@@ -211,9 +212,10 @@ bot93 = Bot_Stoch_RSI_EMA('XRPUSDT','15m', 200)
 # bot95 = Bot_Stoch_RSI_EMA('ZILUSDT','15m', 200)
 # bot96 = Bot_Stoch_RSI_EMA('ZRXUSDT','15m', 200)
 
-
-############################################################## # UNCOMMENT TO TRADE #############################################################
 timing = 0.01
+
+
+# UNCOMMENT TO TRADE
 
 while True:
     bot1.dfall('ADAUSDT', '15m', 200)

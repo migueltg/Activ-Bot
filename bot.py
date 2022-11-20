@@ -1,4 +1,6 @@
+import random
 import subprocess
+import threading
 import time
 from subprocess import DEVNULL, STDOUT
 
@@ -16,6 +18,7 @@ we_short = "1"
 
 # Interval to Trade Whatever
 interval = "1m"
+time_wait_ask = random.randint(30, 50)
 
 # EMA
 emafast = 50
@@ -34,9 +37,9 @@ class Bot_Stoch_RSI_EMA:
         self.symbol = symbol
         self.interval = interval
         self.limit = limit
+        print(f"bot {symbol} initiated")
 
     def dfall(self):
-
         bars = binance_client.get_historical_klines(
             self.symbol, interval=self.interval, limit=self.limit
         )
@@ -118,7 +121,7 @@ class Bot_Stoch_RSI_EMA:
                 stdout=DEVNULL,
                 stderr=STDOUT,
             )
-            time.sleep(45)
+            time.sleep(time_wait_ask)
             startlong.kill()
             pos_dict["in_position"] = True
 
@@ -143,7 +146,7 @@ class Bot_Stoch_RSI_EMA:
                 stdout=DEVNULL,
                 stderr=STDOUT,
             )
-            time.sleep(45)
+            time.sleep(time_wait_ask)
             startshort.kill()
             pos_dict["in_position"] = True
 
@@ -168,11 +171,15 @@ class Bot_Stoch_RSI_EMA:
                 stdout=DEVNULL,
                 stderr=STDOUT,
             )
-            time.sleep(45)
+            time.sleep(time_wait_ask)
             stopbot.kill()
             pos_dict["in_position"] = False
 
         return df
+
+    def run_dfall(self):
+        while True:
+            self.dfall()
 
 
 def read_config():
@@ -193,10 +200,22 @@ binance_client = Client(
     api_secret=api_key_config["binance_api_secret"],
 )
 
-while True:
+
+def main():
+    threads = []
     for symbol in symbols_config["symbols"]:
         bot = Bot_Stoch_RSI_EMA(
             binance_client, symbol["symbol"], symbol["interval"], symbol["limit"]
         )
-        bot.dfall()
-        time.sleep(timing)
+        symbol_thread = threading.Thread(target=bot.run_dfall, daemon=True)
+        symbol_thread.start()
+        threads.append(symbol_thread)
+
+    for thread in threads:
+        thread.join()
+
+    while True:
+        time.sleep(1)
+
+
+main()
